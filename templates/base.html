@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Python Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Left Sidebar: Directory of Posts -->
+        <aside class="sidebar-left">
+            <h2>All Posts</h2>
+            <ul>
+                {% for post in all_posts %}
+                    <li><a href="{{ url_for('post_page', slug=post.slug) }}">{{ post.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-main">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Right Sidebar: List of Labels -->
+        <aside class="sidebar-right">
+            <h2>Labels</h2>
+            <ul>
+                {% for label in all_labels %}
+                    <li><a href="{{ url_for('posts_by_label', label_name=label) }}">{{ label }}</a></li>
+                {% endfor %}
+            </ul>
+        </aside>
+    </div>
+</body>
+</html>

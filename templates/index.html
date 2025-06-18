@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="author-info">
+        <h2>Site Author</h2>
+        <p>This site is maintained by the Flask Master.</p>
+    </div>
+
+    <hr>
+
+    <div class="latest-posts">
+        <!-- If a specific label is selected, change the title -->
+        {% if current_label %}
+            <h1>Posts Tagged: '{{ current_label }}'</h1>
+        {% else %}
+            <h1>Latest Posts</h1>
+        {% endif %}
+
+        <!-- Loop through available posts (either all or filtered by label) -->
+        {% set posts_to_display = posts if posts is defined else all_posts %}
+        
+        {% for post in posts_to_display %}
+            <article class="post-summary">
+                <h2><a href="{{ url_for('post_page', slug=post.slug) }}">{{ post.title }}</a></h2>
+                <p class="post-meta">By {{ post.author }} on {{ post.date }}</p>
+                <div class="post-labels">
+                    {% for label in post.labels %}
+                        <a href="{{ url_for('posts_by_label', label_name=label) }}" class="label-tag">{{ label }}</a>
+                    {% endfor %}
+                </div>
+            </article>
+        {% else %}
+            <p>No posts found.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
