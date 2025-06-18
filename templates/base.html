@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Python Blog</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Pico.css for beautiful, default styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <!-- Your custom styles (can override Pico if needed) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <div class="main-container">
-        <!-- Left Sidebar: Directory of Posts -->
-        <aside class="sidebar-left">
-            <h2>All Posts</h2>
-            <ul>
-                {% for post in all_posts %}
-                    <li><a href="{{ url_for('post_page', slug=post.slug) }}">{{ post.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </aside>
+    <div class="container"> <!-- Add a container for nice margins -->
+        <div class="grid">  <!-- This is the Pico grid system -->
+            <!-- Left Sidebar: Directory of Posts -->
+            <aside>
+                <h2>All Posts</h2>
+                ...
+            </aside>
 
-        <!-- Main Content Area -->
-        <main class="content-main">
-            {% block content %}{% endblock %}
-        </main>
+            <!-- Main Content Area -->
+            <main>
+                {% block content %}{% endblock %}
+            </main>
 
-        <!-- Right Sidebar: List of Labels -->
-        <aside class="sidebar-right">
-            <h2>Labels</h2>
-            <ul>
-                {% for label in all_labels %}
-                    <li><a href="{{ url_for('posts_by_label', label_name=label) }}">{{ label }}</a></li>
-                {% endfor %}
-            </ul>
-        </aside>
+            <!-- Right Sidebar: List of Labels -->
+            <aside>
+                <h2>Labels</h2>
+                ...
+            </aside>
+        </div>
     </div>
 </body>
 </html>
